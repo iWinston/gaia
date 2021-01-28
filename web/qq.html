@@ -9,25 +9,29 @@
     <h3>群号转码器</h3>
     <input type="number" placeholder="请输入qq群号" id="input" onkeyup="convert()">
     <h3>结果是</h3>
-    <h4 id="result"></h4>
-    <button onclick="copy()">点击复制</button>
+    <div id="result"></div>
+    <button class="btn" data-clipboard-target="#result">点击复制</button>
     <div id="tip" style="color: green;"></div>
 </body>
+<script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
 <script type="text/javascript">
+    const clipboard = new ClipboardJS('.btn');
+    clipboard.on('success', function(e) {
+        document.getElementById('tip').style = 'color: green;'
+        document.getElementById('tip').innerText = '复制成功'
+        e.clearSelection();
+    });
+
+    clipboard.on('error', function(e) {
+        document.getElementById('tip').style = 'color: red;'
+        document.getElementById('tip').innerText = '复制失败，请手动复制'
+    });
     function convert() {
         const strArr = ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"]
         const value = document.getElementById('input').value
         const encodedStr = value.split('').map(num => strArr[Number(num)]).join('')
         console.log(encodedStr)
         document.getElementById('result').innerText = encodedStr
-    }
-    function copy() {
-        const input = document.getElementById('input');
-        input.select();
-        if (document.execCommand('copy')) {
-            document.execCommand('copy');
-            document.getElementById('tip').innerText = '复制成功'
-        }
     }
 </script>
 </html>
