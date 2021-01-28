@@ -29,7 +29,7 @@
     });
 
     function convert() {
-        const strArr = ["⓪", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"]
+        const strArr = ["O", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨"]
         const value = document.getElementById('input').value
         const encodedStr = value.split('').map(num => strArr[Number(num)]).join('')
         console.log(encodedStr)
